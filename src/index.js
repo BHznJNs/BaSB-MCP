@@ -13,21 +13,16 @@ function pathToIndexFilename(path, index) {
 
 // --- --- --- --- --- ---
 
-const mcpGlobalStates = {
-    targetEndpoint: null,
-}
-
-export function setTargetEndpoint(targetEndpoint) {
-    mcpGlobalStates.targetEndpoint = targetEndpoint
-}
-
-export function mcpServerFactory() {
+/**
+ * @param {string} targetEndpoint 
+ */
+export function mcpServerFactory(targetEndpoint) {
     /**
      * @param {string | string[]} path 
      * @returns {Promise<string>} The target blog content in Markdown format
      */
     async function blogContentHandler(path /** @type {string} */) {
-        const targetResourceUrl = new URL("static/" + path, mcpGlobalStates.targetEndpoint)
+        const targetResourceUrl = new URL("static/" + path, targetEndpoint)
         console.log("Target blog url: ", targetResourceUrl.href)
         const response = await fetch(targetResourceUrl)
         return await response.text()
@@ -39,7 +34,7 @@ export function mcpServerFactory() {
      */
     async function newestContentHandler(page) {
         const resolvedPath = "newest_" + page
-        const targetResourceUrl = new URL(`.index/${resolvedPath}`, mcpGlobalStates.targetEndpoint)
+        const targetResourceUrl = new URL(`.index/${resolvedPath}`, targetEndpoint)
         console.log("Target newest index url: ", targetResourceUrl.href)
         const response = await fetch(targetResourceUrl)
         return await response.json()
@@ -55,7 +50,7 @@ export function mcpServerFactory() {
             ? "static"
             : "static/" + path
         const resolvedPath = pathToIndexFilename(path, page)
-        const targetResourceUrl = new URL(`.index/${resolvedPath}`, mcpGlobalStates.targetEndpoint)
+        const targetResourceUrl = new URL(`.index/${resolvedPath}`, targetEndpoint)
         console.log("Target directory index url: ", targetResourceUrl.href)
         const response = await fetch(targetResourceUrl)
         return await response.json()
