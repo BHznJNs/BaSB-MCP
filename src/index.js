@@ -58,7 +58,7 @@ export function mcpServerFactory(targetEndpoint) {
 
     const server = new McpServer({
         name: "BaSB-MCP",
-        version: "1.0.5",
+        version: "1.0.6",
     }, {
         instructions: MCP_SERVER_INSTRUCTION
     })
@@ -103,7 +103,7 @@ export function mcpServerFactory(targetEndpoint) {
 
     server.registerResource(
         "directory",
-        new ResourceTemplate("directory://{path}/?page={page}", { list: undefined }),
+        new ResourceTemplate("directory://{+path}/?page={page}", { list: undefined }),
         {
             title: "Directory Content",
             description: DIRECTORY_RESOURCE_INSTRUCTION,
