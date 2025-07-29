@@ -1,6 +1,9 @@
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js"
 import { MCP_SERVER_INSTRUCTION, ARTICLE_RESOURCE_INSTRUCTION, NEWEST_RESOURCE_INSTRUCTION, DIRECTORY_RESOURCE_INSTRUCTION } from "./instructions.js"
 
+function normalizePath(filePath) {
+    return filePath.replace(/\\/g, "/")
+}
 function pathToIndexFilename(path, index) {
     const normalizedPath = normalizePath(path)
     const removedTailSlash = normalizedPath.replace(/\/$/, "")
