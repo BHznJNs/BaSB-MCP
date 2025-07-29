@@ -28,6 +28,7 @@ export function mcpServerFactory() {
      */
     async function blogContentHandler(path /** @type {string} */) {
         const targetResourceUrl = new URL("static/" + path, mcpGlobalStates.targetEndpoint)
+        console.log("Target blog url: ", targetResourceUrl.href)
         const response = await fetch(targetResourceUrl)
         return await response.text()
     }
@@ -39,6 +40,7 @@ export function mcpServerFactory() {
     async function newestContentHandler(page) {
         const resolvedPath = "newest_" + page
         const targetResourceUrl = new URL(`.index/${resolvedPath}`, mcpGlobalStates.targetEndpoint)
+        console.log("Target newest index url: ", targetResourceUrl.href)
         const response = await fetch(targetResourceUrl)
         return await response.json()
     }
@@ -54,13 +56,14 @@ export function mcpServerFactory() {
             : "static/" + path
         const resolvedPath = pathToIndexFilename(path, page)
         const targetResourceUrl = new URL(`.index/${resolvedPath}`, mcpGlobalStates.targetEndpoint)
+        console.log("Target directory index url: ", targetResourceUrl.href)
         const response = await fetch(targetResourceUrl)
         return await response.json()
     }
 
     const server = new McpServer({
         name: "BaSB-MCP",
-        version: "1.0.2",
+        version: "1.0.3",
     }, {
         instructions: MCP_SERVER_INSTRUCTION
     })

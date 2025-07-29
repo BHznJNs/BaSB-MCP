@@ -1,7 +1,7 @@
 {
   "name": "basb-mcp",
   "description": "The MCP server for BaSB project.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "BHznJNs",
   "repository": "https://github.com/BHznJNs/BaSB-mcp",
   "license": "GPL-v3",

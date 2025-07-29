@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import mcpMain from "./src/server.js"
 
 const commandLineArgs = process.argv.slice(2)
