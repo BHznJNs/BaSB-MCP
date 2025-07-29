@@ -1,5 +1,5 @@
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { MCP_SERVER_INSTRUCTION, ARTICLE_RESOURCE_INSTRUCTION, NEWEST_RESOURCE_INSTRUCTION, DIRECTORY_RESOURCE_INSTRUCTION } from "./instructions.js"
+import { MCP_SERVER_INSTRUCTION, BLOG_RESOURCE_INSTRUCTION, NEWEST_RESOURCE_INSTRUCTION, DIRECTORY_RESOURCE_INSTRUCTION } from "./instructions.js"
 
 function normalizePath(filePath) {
     return filePath.replace(/\\/g, "/")
@@ -24,9 +24,9 @@ export function setTargetEndpoint(targetEndpoint) {
 export function mcpServerFactory() {
     /**
      * @param {string | string[]} path 
-     * @returns {Promise<string>} The target article content in Markdown format
+     * @returns {Promise<string>} The target blog content in Markdown format
      */
-    async function articleHandler(path /** @type {string} */) {
+    async function blogContentHandler(path /** @type {string} */) {
         const targetResourceUrl = new URL("static/" + path, mcpGlobalStates.targetEndpoint)
         const response = await fetch(targetResourceUrl)
         return await response.text()
@@ -60,20 +60,20 @@ export function mcpServerFactory() {
 
     const server = new McpServer({
         name: "BaSB-MCP",
-        version: "1.0.0",
+        version: "1.0.2",
     }, {
         instructions: MCP_SERVER_INSTRUCTION
     })
 
     server.registerResource(
-        "article",
-        new ResourceTemplate("article://{+path}", { list: undefined }),
+        "blog",
+        new ResourceTemplate("blog://{+path}", { list: undefined }),
         {
-            title: "Article Content",
-            description: ARTICLE_RESOURCE_INSTRUCTION
+            title: "Blog Content",
+            description: BLOG_RESOURCE_INSTRUCTION,
         },
         async (uri, { path }) => {
-            const result = await articleHandler(path)
+            const result = await blogContentHandler(path)
             return {
                 contents: [{
                     uri: uri.href,

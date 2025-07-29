@@ -2,17 +2,17 @@ export const MCP_SERVER_INSTRUCTION = `\
 This is the MCP server for a BaSB workspace. The BaSB is short for "Blog as Second Brain",\
 which is a personal knowledge management system.
 
-You can use this MCP server to access the directories and articles in the BaSB workspace.\
+You can use this MCP server to access the directories and blogs in the BaSB workspace.\
 `
 
-export const ARTICLE_RESOURCE_INSTRUCTION = `\
-This resource template is used to get the content of an article specified by the path.
-The returned value is the content of target article in Markdown format.\
+export const BLOG_RESOURCE_INSTRUCTION = `\
+This resource template is used to get the content of an blog specified by the path.
+The returned value is the content of target blog in Markdown format.\
 `
 
 export const DIRECTORY_RESOURCE_INSTRUCTION = `\
 This resource template is used to get data for a directory specified by the path.
-The data includes the articles in the directory, the subdirectories, and the description of the target directory.
+The data includes the blog metadatas in the directory, the subdirectories, and the description of the target directory.
 
 If the path is "root", the root directory of the BaSB workspace will be used.
 
@@ -37,7 +37,7 @@ The returned value is a JSON object with the following structure:
 \`\`\``
 
 export const NEWEST_RESOURCE_INSTRUCTION = `\
-This resource template is used to get the newest articles in the BaSB workspace.
+This resource template is used to get the newest blogs in the BaSB workspace.
 The returned value is a JSON object with the following structure:
 \`\`\`
 {
@@ -45,8 +45,8 @@ The returned value is a JSON object with the following structure:
   "current": number,            // Current page number
   "content": [                  // Content list
     {
-      "title": string,          // Article title
-      "link": string,           // Relative path to the article
+      "title": string,          // Blog title
+      "link": string,           // Relative path to the blog
       "createTime": number      // Creation timestamp
     },
     // ... more content items
