@@ -1,0 +1,55 @@
+export const MCP_SERVER_INSTRUCTION = `\
+This is the MCP server for a BaSB workspace. The BaSB is short for "Blog as Second Brain",\
+which is a personal knowledge management system.
+
+You can use this MCP server to access the directories and articles in the BaSB workspace.\
+`
+
+export const ARTICLE_RESOURCE_INSTRUCTION = `\
+This resource template is used to get the content of an article specified by the path.
+The returned value is the content of target article in Markdown format.\
+`
+
+export const DIRECTORY_RESOURCE_INSTRUCTION = `\
+This resource template is used to get data for a directory specified by the path.
+The data includes the articles in the directory, the subdirectories, and the description of the target directory.
+
+If the path is "root", the root directory of the BaSB workspace will be used.
+
+The returned value is a JSON object with the following structure:
+\`\`\`
+{
+  "total": number,              // Total number of pages
+  "current": number,            // Current page number
+  "content": [                  // Content list
+    {
+      "name": string,           // Name (folders end with /, files end with .md)
+      "createTime": number,     // Creation timestamp
+      "modifyTime": number      // Modification timestamp
+    },
+    // ... more content items
+  ],
+  "createTime": number,         // Directory creation timestamp
+  "updateTime": number,         // Directory update timestamp
+  "isReversed": boolean,        // Whether the order is reversed
+  "dirDescription": string      // Directory description (Markdown format)
+}
+\`\`\``
+
+export const NEWEST_RESOURCE_INSTRUCTION = `\
+This resource template is used to get the newest articles in the BaSB workspace.
+The returned value is a JSON object with the following structure:
+\`\`\`
+{
+  "total": number,              // Total number of pages
+  "current": number,            // Current page number
+  "content": [                  // Content list
+    {
+      "title": string,          // Article title
+      "link": string,           // Relative path to the article
+      "createTime": number      // Creation timestamp
+    },
+    // ... more content items
+  ]
+}
+\`\`\``
