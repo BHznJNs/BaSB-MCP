@@ -14,7 +14,8 @@ export const DIRECTORY_RESOURCE_INSTRUCTION = `\
 This resource template is used to get data for a directory specified by the path.
 The data includes the blog metadatas in the directory, the subdirectories, and the description of the target directory.
 
-If the path is "root", the root directory of the BaSB workspace will be used.
+Resource URI format: \`directory://{path}/?page={page}\`, the \`path\` and \`page\` parameter are both **NECESSARY**.
+If the specified path is "root", the root directory of the BaSB workspace will be used.
 
 The returned value is a JSON object with the following structure:
 \`\`\`

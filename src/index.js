@@ -58,7 +58,7 @@ export function mcpServerFactory(targetEndpoint) {
 
     const server = new McpServer({
         name: "BaSB-MCP",
-        version: "1.0.3",
+        version: "1.0.5",
     }, {
         instructions: MCP_SERVER_INSTRUCTION
     })
